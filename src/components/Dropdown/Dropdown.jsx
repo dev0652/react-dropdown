@@ -11,21 +11,22 @@ class Dropdown extends Component {
   };
 
   render() {
+    const { visible } = this.state;
+    const { toggle } = this;
+
     return (
       <div className="Dropdown">
         <button
           type="button"
           className="Dropdown__toggle"
-          onClick={this.toggle}
-          onMouseOver={this.toggle}
-          onMouseLeave={this.toggle}
+          onClick={toggle}
+          // onMouseOver={toggle}
+          // onMouseLeave={toggle}
         >
-          {this.state.visible ? 'Hide' : 'Show'}
+          {visible ? 'Hide' : 'Show'}
         </button>
 
-        {this.state.visible && (
-          <div className="Dropdown__menu">Dropdown menu</div>
-        )}
+        {visible && <div className="Dropdown__menu">Dropdown menu</div>}
       </div>
     );
   }

@@ -1,29 +1,41 @@
-// import Dropdown from './Dropdown/Dropdown';
-import ColorPicker from './ColorPicker/ColorPicker';
+import React, { Component } from 'react';
 
-const ColorPickerOptions = [
-  { label: 'red', color: 'red' },
-  { label: 'green', color: 'green' },
-  { label: 'blue', color: 'blue' },
-  { label: 'grey', color: 'grey' },
-  { label: 'pink', color: 'pink' },
-  { label: 'indigo', color: 'indigo' },
-];
+// import Dropdown from './Dropdown';
+// import ColorPicker from './ColorPicker';
+// import { ColorPickerOptions } from '../data/colorPickerOptions';
+import TodoList from './TodoList';
 
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101',
-      }}
-    >
-      {/* <Dropdown /> */}
-      <ColorPicker options={ColorPickerOptions} />
-    </div>
-  );
-};
+class App extends Component {
+  state = {
+    todos: [
+      { id: 'id-1', text: 'Master React 101', completed: false },
+      { id: 'id-2', text: 'Get handy with React Router', completed: false },
+      { id: 'id-3', text: 'Survive Redux', completed: false },
+    ],
+  };
+
+  render() {
+    const { todos } = this.state;
+
+    return (
+      <div
+        style={{
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 20,
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize: 24,
+          color: '#010101',
+        }}
+      >
+        {/* <Dropdown /> */}
+        {/* <ColorPicker options={ColorPickerOptions} /> */}
+        <TodoList todos={todos} />
+      </div>
+    );
+  }
+}
+
+export default App;
