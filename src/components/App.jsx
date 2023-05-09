@@ -2,21 +2,22 @@ import React, { Component } from 'react';
 
 // import Dropdown from './Dropdown';
 // import ColorPicker from './ColorPicker';
-// import { ColorPickerOptions } from '../data/colorPickerOptions';
+// import ColorPickerOptions from '../data/colorPickerOptions';
 import TodoList from './TodoList';
+import todos from '../data/todoList';
 
 class App extends Component {
-  state = {
-    todos: [
-      { id: 'id-1', text: 'Master React 101', completed: false },
-      { id: 'id-2', text: 'Get handy with React Router', completed: false },
-      { id: 'id-3', text: 'Survive Redux', completed: false },
-    ],
+  state = { todos };
+
+  deleteTodo = todoId => {
+    this.setState(prevState => ({
+      todos: prevState.todos.filter(todo => todo.id !== todoId),
+    }));
   };
 
   render() {
     const { todos } = this.state;
-
+    const { deleteTodo } = this;
     return (
       <div
         style={{
@@ -32,7 +33,7 @@ class App extends Component {
       >
         {/* <Dropdown /> */}
         {/* <ColorPicker options={ColorPickerOptions} /> */}
-        <TodoList todos={todos} />
+        <TodoList todos={todos} onDeleteTodo={deleteTodo} />
       </div>
     );
   }
