@@ -23,7 +23,7 @@ class Dropdown extends Component {
           // onMouseOver={toggle}
           // onMouseLeave={toggle}
         >
-          {visible ? 'Hide' : 'Show'}
+          {visible ? 'Hide' : 'Show'} dropdown
         </button>
 
         {visible && <div className="Dropdown__menu">Dropdown menu</div>}

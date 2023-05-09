@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-// import Dropdown from './Dropdown';
-// import ColorPicker from './ColorPicker';
-// import ColorPickerOptions from '../data/colorPickerOptions';
+import Dropdown from './Dropdown';
+import ColorPicker from './ColorPicker';
+import ColorPickerOptions from '../data/colorPickerOptions';
 import TodoList from './TodoList';
 import todos from '../data/todoList';
 
@@ -31,8 +31,8 @@ class App extends Component {
           color: '#010101',
         }}
       >
-        {/* <Dropdown /> */}
-        {/* <ColorPicker options={ColorPickerOptions} /> */}
+        <Dropdown />
+        <ColorPicker options={ColorPickerOptions} />
         <TodoList todos={todos} onDeleteTodo={deleteTodo} />
       </div>
     );
