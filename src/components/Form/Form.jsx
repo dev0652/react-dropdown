@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
 
 export default class Form extends Component {
   state = {
@@ -39,7 +40,7 @@ export default class Form extends Component {
           <input
             type="text"
             name="name"
-            id=""
+            id={nanoid()}
             placeholder="Enter name"
             value={name}
             onChange={handleChange}
@@ -51,7 +52,7 @@ export default class Form extends Component {
           <input
             type="text"
             name="tag"
-            id=""
+            id={nanoid()}
             placeholder="Enter tag"
             value={tag}
             onChange={this.handleChange}
