@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 
-import Dropdown from './Dropdown';
-import ColorPicker from './ColorPicker';
-import ColorPickerOptions from '../data/colorPickerOptions';
-import TodoList from './TodoList';
+// import Dropdown from './Dropdown';
+// import ColorPicker from './ColorPicker';
+// import ColorPickerOptions from '../data/colorPickerOptions';
+// import TodoList from './TodoList';
 import todos from '../data/todoList';
+import { Container } from './App.styled';
+import Form from './Form/Form';
 
 class App extends Component {
-  state = { todos };
+  state = {
+    todos,
+  };
 
   deleteTodo = todoId => {
     this.setState(prevState => ({
@@ -15,26 +19,23 @@ class App extends Component {
     }));
   };
 
+  formSubmitHandler = data => {
+    console.log(data);
+  };
+
   render() {
-    const { todos } = this.state;
-    const { deleteTodo } = this;
+    // const { todos } = this.state;
+    // const { deleteTodo } = this;
+    const { formSubmitHandler } = this;
+
     return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 24,
-          color: '#010101',
-        }}
-      >
-        <Dropdown />
-        <ColorPicker options={ColorPickerOptions} />
-        <TodoList todos={todos} onDeleteTodo={deleteTodo} />
-      </div>
+      <Container>
+        <Form onSubmit={formSubmitHandler} />
+
+        {/* <Dropdown /> */}
+        {/* <ColorPicker options={ColorPickerOptions} /> */}
+        {/* <TodoList todos={todos} onDeleteTodo={deleteTodo} /> */}
+      </Container>
     );
   }
 }
