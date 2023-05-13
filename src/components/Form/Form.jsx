@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import { Label, RadioLabel, CheckboxLabel, MyForm } from './Form.styled';
 
 export default class Form extends Component {
   state = {
     name: '',
     tag: '',
+    experience: 'junior',
+    license: false,
   };
 
   handleChange = event => {
     const { name, value } = event.currentTarget;
 
     this.setState({ [name]: value });
+  };
+
+  handleLicenseChange = event => {
+    this.setState({
+      license: event.currentTarget.checked,
+    });
   };
 
   handleSubmit = event => {
@@ -23,19 +32,21 @@ export default class Form extends Component {
     this.setState({
       name: '',
       tag: '',
+      experience: 'junior',
     });
   };
 
   render() {
     const {
-      state: { name, tag },
+      state: { name, tag, experience, license },
       handleChange,
       handleSubmit,
+      handleLicenseChange,
     } = this;
 
     return (
-      <form onSubmit={handleSubmit}>
-        <label>
+      <MyForm onSubmit={handleSubmit}>
+        <Label>
           Name
           <input
             type="text"
@@ -45,9 +56,9 @@ export default class Form extends Component {
             value={name}
             onChange={handleChange}
           />
-        </label>
+        </Label>
 
-        <label>
+        <Label>
           Tag
           <input
             type="text"
@@ -55,12 +66,56 @@ export default class Form extends Component {
             id={nanoid()}
             placeholder="Enter tag"
             value={tag}
-            onChange={this.handleChange}
+            onChange={handleChange}
           />
-        </label>
+        </Label>
 
-        <button type="submit">Send</button>
-      </form>
+        <p>Your level:</p>
+        <RadioLabel>
+          Junior
+          <input
+            type="radio"
+            name="experience"
+            onChange={handleChange}
+            value="junior"
+            checked={experience === 'junior'}
+          />
+        </RadioLabel>
+        <RadioLabel>
+          Middle
+          <input
+            type="radio"
+            name="experience"
+            onChange={handleChange}
+            value="middle"
+            checked={experience === 'middle'}
+          />
+        </RadioLabel>
+        <RadioLabel>
+          Senior
+          <input
+            type="radio"
+            name="experience"
+            onChange={handleChange}
+            value="senior"
+            checked={experience === 'senior'}
+          />
+        </RadioLabel>
+
+        <CheckboxLabel>
+          I accept the Terms and Conditions
+          <input
+            type="checkbox"
+            name="license"
+            checked={license}
+            onChange={handleLicenseChange}
+          />
+        </CheckboxLabel>
+
+        <button type="submit" disabled={!license}>
+          Send
+        </button>
+      </MyForm>
     );
   }
 }
