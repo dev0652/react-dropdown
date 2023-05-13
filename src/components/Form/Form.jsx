@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { Label, RadioLabel, CheckboxLabel, MyForm } from './Form.styled';
 
-export default class Form extends Component {
+class Form extends Component {
   state = {
     name: '',
     tag: '',
@@ -119,3 +119,4 @@ export default class Form extends Component {
     );
   }
 }
+export default Form;

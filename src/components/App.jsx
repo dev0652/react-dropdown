@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
 
 // import Dropdown from './Dropdown';
 // import ColorPicker from './ColorPicker';
 // import ColorPickerOptions from '../data/colorPickerOptions';
-// import TodoList from './TodoList';
-import todos from '../data/todoList';
+
 import { Container } from './App.styled';
 import Form from './Form/Form';
+
+import todos from '../data/todoList';
+import TodoList from './TodoList';
+import TodoEditor from './TodoEditor/TodoEditor';
 
 class App extends Component {
   state = {
     todos,
+  };
+
+  addTodo = text => {
+    const todo = {
+      id: nanoid(),
+      text,
+      completed: false,
+    };
+
+    this.setState(prevState => ({
+      todos: [todo, ...prevState.todos],
+    }));
   };
 
   deleteTodo = todoId => {
@@ -19,14 +35,25 @@ class App extends Component {
     }));
   };
 
+  toggleCompleted = todoId => {
+    this.setState(prevState => ({
+      todos: prevState.todos.map(todo =>
+        todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
+      ),
+    }));
+  };
+
   formSubmitHandler = data => {
     console.log(data);
   };
 
   render() {
-    // const { todos } = this.state;
-    // const { deleteTodo } = this;
-    const { formSubmitHandler } = this;
+    const {
+      deleteTodo,
+      addTodo,
+      formSubmitHandler,
+      state: { todos },
+    } = this;
 
     return (
       <Container>
@@ -34,7 +61,14 @@ class App extends Component {
 
         {/* <Dropdown /> */}
         {/* <ColorPicker options={ColorPickerOptions} /> */}
-        {/* <TodoList todos={todos} onDeleteTodo={deleteTodo} /> */}
+
+        <TodoEditor onSubmit={addTodo} />
+
+        <TodoList
+          todos={todos}
+          onDeleteTodo={deleteTodo}
+          onToggleCompleted={this.toggleCompleted}
+        />
       </Container>
     );
   }
