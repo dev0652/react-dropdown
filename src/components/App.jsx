@@ -24,8 +24,8 @@ class App extends Component {
       completed: false,
     };
 
-    this.setState(prevState => ({
-      todos: [todo, ...prevState.todos],
+    this.setState(({ todos }) => ({
+      todos: [todo, ...todos],
     }));
   };
 
