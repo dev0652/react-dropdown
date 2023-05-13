@@ -11,10 +11,16 @@ import Form from './Form/Form';
 import todos from '../data/todoList';
 import TodoList from './TodoList';
 import TodoEditor from './TodoEditor/TodoEditor';
+import { Filter } from './Filter/Filter';
 
 class App extends Component {
   state = {
     todos,
+    filter: '',
+  };
+
+  changeFilter = event => {
+    this.setState({ filter: event.currentTarget.value });
   };
 
   addTodo = text => {
@@ -43,6 +49,14 @@ class App extends Component {
     }));
   };
 
+  getVisibleTodos = () => {
+    const { todos, filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return todos.filter(todo =>
+      todo.text.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
   formSubmitHandler = data => {
     console.log(data);
   };
@@ -52,7 +66,9 @@ class App extends Component {
       deleteTodo,
       addTodo,
       formSubmitHandler,
-      state: { todos },
+      changeFilter,
+      getVisibleTodos,
+      state: { filter },
     } = this;
 
     return (
@@ -64,8 +80,10 @@ class App extends Component {
 
         <TodoEditor onSubmit={addTodo} />
 
+        <Filter value={filter} onChange={changeFilter} />
+
         <TodoList
-          todos={todos}
+          todos={getVisibleTodos()}
           onDeleteTodo={deleteTodo}
           onToggleCompleted={this.toggleCompleted}
         />
